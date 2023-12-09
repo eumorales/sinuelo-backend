@@ -19,6 +19,11 @@ const SincronizarController = require('./controllers/Sincronizar/SincronizarCont
 //Relatorios
 const RelatoriosController = require('./controllers/Relatorios/RelatoriosController');
 
+const cors = require('cors')
+const app = express('')
+app.use(cors())
+
+
 //Rotas 
 routes.post('/admin/login', LoginController.administrador); //Login do administrador (no site)
 routes.post('/login', LoginController.funcionario); //Login do funcionário (aplicativo)
@@ -89,5 +94,9 @@ routes.get('/sincronizar', verifyJWT, SincronizarController.buscar);
 routes.post('/sincronizar', verifyJWT, SincronizarController.cadastrar);
 //Relatorios
 routes.get('/relatorios/:id', verifyJWT, RelatoriosController.buscarPorId);
+
+app.listen(3333, () => {
+    console.log('Servidor rodando na porta 3333!');
+  });
 
 module.exports = routes;
